@@ -24,6 +24,10 @@ import {
   IconMessages,
   IconSearch,
 } from "@tabler/icons";
+import { useState } from "react";
+import Deso from "deso-protocol";
+
+const deso = new Deso();
 
 const useStyles = createStyles((theme) => ({
   link: {
@@ -128,7 +132,14 @@ export default function MantineHeader() {
 
           <Group className={classes.hiddenMobile}>
             <MantineThemeButton />
-            <Button variant="default">Log in</Button>
+            <Button
+              variant="default"
+              onClick={async () => {
+                const user = await deso.identity.login(2);
+              }}
+            >
+              Log In
+            </Button>
           </Group>
 
           <Burger
@@ -145,6 +156,7 @@ export default function MantineHeader() {
         size="100%"
         padding="md"
         title="DeSo Template App"
+        size="md"
         className={classes.hiddenDesktop}
         zIndex={1000000}
       >
@@ -156,24 +168,45 @@ export default function MantineHeader() {
 
           <Link to="/" className={classes.link}>
             <IconHome2 className={classes.linkIcon} />
+            <Text sx={{ marginLeft: 10 }} align="center">
+              Home
+            </Text>
           </Link>
           <Link to="/profile" className={classes.link}>
             <IconUser />
+            <Text sx={{ marginLeft: 10 }} align="center">
+              Profile
+            </Text>
           </Link>
           <Link to="/discover" className={classes.link}>
             <IconDeviceDesktopAnalytics />
+            <Text sx={{ marginLeft: 10 }} align="center">
+              Discover
+            </Text>
           </Link>
           <Link to="/messages" className={classes.link}>
             <IconMessages />
+            <Text sx={{ marginLeft: 10 }} align="center">
+              Messages
+            </Text>
           </Link>
           <Link to="/notifications" className={classes.link}>
             <IconBellRinging />
+            <Text sx={{ marginLeft: 10 }} align="center">
+              Notifications
+            </Text>
           </Link>
           <Link to="/wallet" className={classes.link}>
             <IconReceipt2 />
+            <Text sx={{ marginLeft: 10 }} align="center">
+              Wallet
+            </Text>
           </Link>
           <Link to="/settings" className={classes.link}>
             <IconSettings />
+            <Text sx={{ marginLeft: 10 }} align="center">
+              Settings
+            </Text>
           </Link>
 
           <Divider
@@ -183,7 +216,6 @@ export default function MantineHeader() {
 
           <Group position="center" grow pb="xl" px="md">
             <MantineThemeButton />
-            <Button variant="default">Log in</Button>
           </Group>
         </ScrollArea>
       </Drawer>

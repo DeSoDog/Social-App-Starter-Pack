@@ -3,7 +3,7 @@ import { useRecoilState } from "recoil";
 import { Button } from "../../Components/Button";
 import { PublicKey } from "../../State/App.state";
 const deso = new Deso();
-export const Header = () => {
+export const MantineLogin = () => {
   const [publicKey, setPublicKey] = useRecoilState(PublicKey);
   return (
     <div className="bg-[#000000dc] text-white min-w-full justify-between flex py-2 px-4 mb-4">
