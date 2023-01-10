@@ -14,7 +14,16 @@ import {
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import MantineThemeButton from "../Components/MantineThemeButton";
-import { IconSearch } from "@tabler/icons";
+import {
+  IconBellRinging,
+  IconSettings,
+  IconReceipt2,
+  IconHome2,
+  IconUser,
+  IconDeviceDesktopAnalytics,
+  IconMessages,
+  IconSearch,
+} from "@tabler/icons";
 
 const useStyles = createStyles((theme) => ({
   link: {
@@ -146,7 +155,25 @@ export default function MantineHeader() {
           />
 
           <Link to="/" className={classes.link}>
-            Home
+            <IconHome2 className={classes.linkIcon} />
+          </Link>
+          <Link to="/profile" className={classes.link}>
+            <IconUser />
+          </Link>
+          <Link to="/discover" className={classes.link}>
+            <IconDeviceDesktopAnalytics />
+          </Link>
+          <Link to="/messages" className={classes.link}>
+            <IconMessages />
+          </Link>
+          <Link to="/notifications" className={classes.link}>
+            <IconBellRinging />
+          </Link>
+          <Link to="/wallet" className={classes.link}>
+            <IconReceipt2 />
+          </Link>
+          <Link to="/settings" className={classes.link}>
+            <IconSettings />
           </Link>
 
           <Divider
