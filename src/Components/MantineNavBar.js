@@ -6,15 +6,36 @@ import {
   IconUser,
   IconDeviceDesktopAnalytics,
   IconMessages,
+  IconSwitchHorizontal,
+  IconLogout,
 } from "@tabler/icons";
 import { Navbar, createStyles } from "@mantine/core";
-
 import { Link } from "react-router-dom";
 import { useState } from "react";
 
 const useStyles = createStyles((theme, _params, getRef) => {
   const icon = getRef("icon");
   return {
+    header: {
+      paddingBottom: theme.spacing.md,
+      marginBottom: theme.spacing.md * 1.5,
+      borderBottom: `1px solid ${
+        theme.colorScheme === "dark"
+          ? theme.colors.dark[4]
+          : theme.colors.gray[2]
+      }`,
+    },
+
+    footer: {
+      paddingTop: theme.spacing.md,
+      marginTop: theme.spacing.md,
+      borderTop: `1px solid ${
+        theme.colorScheme === "dark"
+          ? theme.colors.dark[4]
+          : theme.colors.gray[2]
+      }`,
+    },
+
     link: {
       ...theme.fn.focusStyles(),
       display: "flex",
@@ -28,6 +49,22 @@ const useStyles = createStyles((theme, _params, getRef) => {
       padding: `${theme.spacing.xs}px ${theme.spacing.sm}px`,
       borderRadius: theme.radius.sm,
       fontWeight: 500,
+
+      "&:hover": {
+        backgroundColor: theme.fn.variant({
+          variant: "light",
+          color: theme.primaryColor,
+        }).background,
+        color: theme.fn.variant({ variant: "light", color: theme.primaryColor })
+          .color,
+
+        [`& .${icon}`]: {
+          color: theme.fn.variant({
+            variant: "light",
+            color: theme.primaryColor,
+          }).color,
+        },
+      },
     },
 
     linkIcon: {
@@ -65,7 +102,7 @@ const data = [
   { link: "/messages", label: "Messages", icon: IconMessages },
   { link: "/notifications", label: "Notifications", icon: IconBellRinging },
   { link: "/wallet", label: "Wallet", icon: IconReceipt2 },
-  { link: "/settings", label: "Settings", icon: IconSettings },
+  { link: "/", label: "Settings", icon: IconSettings },
 ];
 
 export default function MantineNavBar() {
@@ -75,6 +112,7 @@ export default function MantineNavBar() {
 
   const links = data.map((item) => (
     <a
+      to={item.link}
       className={cx(classes.link, {
         [classes.linkActive]: item.label === active,
       })}
@@ -91,6 +129,7 @@ export default function MantineNavBar() {
       </Link>
     </a>
   ));
+
   return (
     <Navbar
       p="md"
