@@ -26,6 +26,8 @@ import {
 } from "@tabler/icons";
 import { useState } from "react";
 import Deso from "deso-protocol";
+import { PublicKey } from "../State/App.state";
+import { useRecoilState } from "recoil";
 
 const deso = new Deso();
 
@@ -104,7 +106,7 @@ export default function MantineHeader() {
   const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] =
     useDisclosure(false);
   const { classes, theme } = useStyles();
-
+  const [publicKey, setPublicKey] = useRecoilState(PublicKey);
   return (
     <Box pb={5}>
       <Header height={60} px="md">
@@ -132,14 +134,30 @@ export default function MantineHeader() {
 
           <Group className={classes.hiddenMobile}>
             <MantineThemeButton />
-            <Button
-              variant="default"
-              onClick={async () => {
-                const user = await deso.identity.login(2);
-              }}
-            >
-              Log In
-            </Button>
+
+            {publicKey ? (
+              <Button
+                variant="default"
+                onClick={async () => {
+                  await deso.identity.logout(publicKey);
+                  // eslint-disable-next-line no-restricted-globals
+                  location.reload();
+                }}
+              >
+                Logout
+              </Button>
+            ) : (
+              <Button
+                variant="default"
+                onClick={async () => {
+                  await deso.identity.login(2);
+                  const loggedInUserKey = deso.identity.getUserKey();
+                  setPublicKey(loggedInUserKey);
+                }}
+              >
+                Login
+              </Button>
+            )}
           </Group>
 
           <Burger
