@@ -22,7 +22,7 @@ export const ProfilePic = ({ publicKey }: ProfilePicProps) => {
 
   const getProfilePic = async () => {
     const profilePic = await deso.user.getSingleProfilePicture(publicKey);
-    
+
     const profile = await deso.user.getSingleProfile({
       PublicKeyBase58Check: publicKey,
     });
@@ -41,7 +41,7 @@ export const ProfilePic = ({ publicKey }: ProfilePicProps) => {
 
   return (
     <>
-      <Avatar variant="gradient" size={77} radius={77} mx="auto" src={pic} />
+      <Avatar size={77} radius={77} mx="auto" src={pic} />
       <Center>
         <Text align="center" size="lg" weight={777} mt="md">
           {profile?.Profile?.Username && "@" + profile?.Profile?.Username}
