@@ -2,7 +2,7 @@ import Deso from "deso-protocol";
 import { PostEntryResponse } from "deso-protocol-types";
 import { useEffect, useState } from "react";
 import { ProfilePic } from "../Components/ProfilePic";
-
+import { Avatar } from "@mantine/core";
 export interface PostTemplateProps {
   post: PostEntryResponse;
   publicKey: string;
@@ -10,6 +10,7 @@ export interface PostTemplateProps {
 const deso = new Deso();
 export const PostsTemplate = ({ post, publicKey }: PostTemplateProps) => {
   const [username, setUsername] = useState("");
+  const [pic, setProfilePic] = useState("");
   useEffect(() => {
     getUsername();
   });
@@ -17,14 +18,14 @@ export const PostsTemplate = ({ post, publicKey }: PostTemplateProps) => {
     const response = await deso.user.getSingleProfile({
       PublicKeyBase58Check: publicKey,
     });
+    const profilePic = await deso.user.getSingleProfilePicture(publicKey);
     setUsername(response.Profile?.Username as string);
+    setProfilePic(profilePic);
   };
   return (
     <div className="border-gray-300 mb-4 rounded-lg border p-6 pb-2 min-w-[1000px] max-w-[1000px]">
       <div className="flex">
-        {publicKey && (
-          <ProfilePic publicKey={post.PosterPublicKeyBase58Check} />
-        )}
+        <Avatar variant="gradient" size={77} radius={77} mx="auto" src={pic} />
         <div className="my-auto font-semibold">@{username}</div>
       </div>
       <div className="ml-12">{post.Body}</div>

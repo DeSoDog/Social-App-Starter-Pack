@@ -150,7 +150,7 @@ export default function MantineHeader() {
               <Button
                 variant="default"
                 onClick={async () => {
-                  await deso.identity.login(2);
+                  await deso.identity.login();
                   const loggedInUserKey = deso.identity.getUserKey();
                   setPublicKey(loggedInUserKey);
                 }}
@@ -234,6 +234,29 @@ export default function MantineHeader() {
 
           <Group position="center" grow pb="xl" px="md">
             <MantineThemeButton />
+            {publicKey ? (
+              <Button
+                variant="default"
+                onClick={async () => {
+                  await deso.identity.logout(publicKey);
+                  // eslint-disable-next-line no-restricted-globals
+                  location.reload();
+                }}
+              >
+                Logout
+              </Button>
+            ) : (
+              <Button
+                variant="default"
+                onClick={async () => {
+                  await deso.identity.login();
+                  const loggedInUserKey = deso.identity.getUserKey();
+                  setPublicKey(loggedInUserKey);
+                }}
+              >
+                Login
+              </Button>
+            )}
           </Group>
         </ScrollArea>
       </Drawer>
