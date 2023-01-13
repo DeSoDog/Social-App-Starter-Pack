@@ -1,4 +1,4 @@
-import Deso from "deso-protocol";
+
 import { ProfileCard } from "../Sections/Profile/ProfileCard";
 import { useRecoilValue } from "recoil";
 import { PublicKey } from "../State/App.state";
