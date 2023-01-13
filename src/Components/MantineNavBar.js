@@ -6,9 +6,6 @@ import {
   IconUser,
   IconDeviceDesktopAnalytics,
   IconMessages,
-  IconHeart,
-  IconRepost,
-  IconDiamond,
 } from "@tabler/icons";
 import { Navbar, createStyles } from "@mantine/core";
 import { Link } from "react-router-dom";

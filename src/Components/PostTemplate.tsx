@@ -20,7 +20,6 @@ const useStyles = createStyles((theme) => ({
   },
 
   body: {
-    paddingLeft: 54,
     paddingTop: theme.spacing.sm,
     fontSize: theme.fontSizes.sm,
   },
@@ -66,15 +65,17 @@ export const PostsTemplate = ({ post, publicKey }: PostTemplateProps) => {
       className={classes.comment}
     >
       <Group>
+        <Space w="xs" />
         <Avatar size={33} radius={33} src={pic} />
         <Text weight="bold" size="sm">
           {username}
         </Text>
       </Group>
-
-      <TypographyStylesProvider className={classes.body}>
-        <Text size="md">{post.Body}</Text>
-      </TypographyStylesProvider>
+      <Center>
+        <TypographyStylesProvider className={classes.body}>
+          <Text size="md">{post.Body}</Text>
+        </TypographyStylesProvider>
+      </Center>
       <Space h="md" />
       <Center>
         <Tooltip
@@ -98,7 +99,6 @@ export const PostsTemplate = ({ post, publicKey }: PostTemplateProps) => {
           position="bottom"
           label="Repost"
           transitionDuration={444}
-          
         >
           <ActionIcon variant="subtle" radius="md" size={36}>
             <IconRecycle size={18} stroke={1.5} />
