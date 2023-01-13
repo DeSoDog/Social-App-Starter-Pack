@@ -1,6 +1,6 @@
 import Deso from "deso-protocol";
 import { useEffect, useState } from "react";
-import { Avatar, Text, Group, Center, Space } from "@mantine/core";
+import { Avatar, Text, Center, Space } from "@mantine/core";
 import {
   GetSingleProfileResponse,
   // PostEntryResponse,
@@ -14,14 +14,14 @@ const deso = new Deso();
 export const ProfilePic = ({ publicKey }: ProfilePicProps) => {
   useEffect(() => {
     getProfilePic();
-  }, []);
+  });
 
   const [pic, setProfilePic] = useState("");
   const [profile, setProfile] = useState<null | GetSingleProfileResponse>(null);
   const [followerInfo, setFollowers] = useState<null | FollowerInfo>(null);
 
   const getProfilePic = async () => {
-    const profilePic = await deso.user.getSingleProfilePicture(publicKey);
+    const profilePic = deso.user.getSingleProfilePicture(publicKey);
 
     const profile = await deso.user.getSingleProfile({
       PublicKeyBase58Check: publicKey,

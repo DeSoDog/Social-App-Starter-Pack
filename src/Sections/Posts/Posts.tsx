@@ -8,7 +8,7 @@ const deso = new Deso();
 export const Posts = ({ publicKey }: ProfilePostsProps) => {
   useEffect(() => {
     getPosts();
-  }, []);
+  });
   const [posts, setPosts] = useState<JSX.Element[]>([]);
   const getPosts = async () => {
     const posts = (

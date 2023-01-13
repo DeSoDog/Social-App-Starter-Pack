@@ -24,7 +24,7 @@ import {
   IconMessages,
   IconSearch,
 } from "@tabler/icons";
-import { useState } from "react";
+
 import Deso from "deso-protocol";
 import { PublicKey } from "../State/App.state";
 import { useRecoilState } from "recoil";
@@ -171,7 +171,6 @@ export default function MantineHeader() {
       <Drawer
         opened={drawerOpened}
         onClose={closeDrawer}
-        size="100%"
         padding="md"
         title="DeSo Template App"
         size="md"

@@ -1,31 +1,13 @@
-import Deso from "deso-protocol";
-import {
-  Space,
-  Avatar,
-  Text,
-  Button,
-  Paper,
-  Center,
-  Group,
-} from "@mantine/core";
-import {
-  GetSingleProfileResponse,
-  // PostEntryResponse,
-  GetFollowsResponse,
-} from "deso-protocol-types";
-import { useEffect, useState } from "react";
+import { Space, Avatar, Text, Button, Paper, Center } from "@mantine/core";
 import { PublicKey } from "../../State/App.state";
-import { useRecoilState } from "recoil";
+import { useRecoilValue } from "recoil";
 import { ProfilePic } from "../../Components/ProfilePic";
-import { Posts } from "../Posts/Posts";
-
-const deso = new Deso();
 
 export interface ProfileCardProps {
   publicKey: string;
 }
 export const ProfileCard = () => {
-  const [publicKey, setPublicKey] = useRecoilState(PublicKey);
+  const publicKey = useRecoilValue(PublicKey);
 
   return (
     <>
@@ -44,10 +26,7 @@ export const ProfileCard = () => {
           <Button fullWidth variant="default" radius="md" mt="xl" size="md">
             Follow
           </Button>
-          
         </Paper>
-        
-       
       ) : (
         <Paper
           shadow="xl"
@@ -76,21 +55,4 @@ export const ProfileCard = () => {
       )}
     </>
   );
-};
-
-const FollowerDisplay = ({ followers, following }: FollowerInfo) => {
-  const [post, setPost] = useState("");
-  useEffect(() => {}, [post, setPost]);
-  return (
-    <>
-      <Group>
-        <Text>{followers && `following: ${following.NumFollowers}`}</Text>
-        <Text>{followers && `followers: ${followers.NumFollowers}`}</Text>
-      </Group>
-    </>
-  );
-};
-type FollowerInfo = {
-  followers: GetFollowsResponse;
-  following: GetFollowsResponse;
 };

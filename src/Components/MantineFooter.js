@@ -1,6 +1,4 @@
-import { Footer, Button, Tooltip } from "@mantine/core";
-import { IconLogout } from "@tabler/icons";
-
+import { Footer } from "@mantine/core";
 export default function MantineFooter() {
   return <Footer height={60} p="md"></Footer>;
 }
