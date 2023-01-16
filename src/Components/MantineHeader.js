@@ -150,7 +150,7 @@ export default function MantineHeader() {
               <Button
                 variant="default"
                 onClick={async () => {
-                  await deso.identity.login();
+                  await deso.identity.login(2);
                   const loggedInUserKey = deso.identity.getUserKey();
                   setPublicKey(loggedInUserKey);
                 }}
@@ -248,7 +248,7 @@ export default function MantineHeader() {
               <Button
                 variant="default"
                 onClick={async () => {
-                  await deso.identity.login();
+                  await deso.identity.login(2);
                   const loggedInUserKey = deso.identity.getUserKey();
                   setPublicKey(loggedInUserKey);
                 }}
