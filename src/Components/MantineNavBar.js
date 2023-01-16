@@ -8,7 +8,7 @@ import {
   IconMessages,
 } from "@tabler/icons";
 import { Navbar, createStyles } from "@mantine/core";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 const useStyles = createStyles((theme, _params, getRef) => {
@@ -80,13 +80,14 @@ const data = [
   { link: "/messages", label: "Messages", icon: IconMessages },
   { link: "/notifications", label: "Notifications", icon: IconBellRinging },
   { link: "/wallet", label: "Wallet", icon: IconReceipt2 },
-  { link: "/", label: "Settings", icon: IconSettings },
+  { link: "/settings", label: "Settings", icon: IconSettings },
 ];
 
 export default function MantineNavBar() {
   const [opened] = useState(false);
   const { classes, cx } = useStyles();
   const [active, setActive] = useState("Billing");
+  const navigate = useNavigate();
 
   const links = data.map((item) => (
     <a
@@ -99,12 +100,11 @@ export default function MantineNavBar() {
       onClick={(event) => {
         event.preventDefault();
         setActive(item.label);
+        navigate(item.link);
       }}
     >
-      <Link to={item.link} className={classes.link}>
-        <item.icon className={classes.linkIcon} stroke={1.5} />
-        <span>{item.label}</span>
-      </Link>
+      <item.icon className={classes.linkIcon} stroke={1.5} />
+      <span>{item.label}</span>
     </a>
   ));
 
