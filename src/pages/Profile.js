@@ -3,7 +3,7 @@ import { useRecoilValue } from "recoil";
 import { PublicKey } from "../State/App.state";
 import { Posts } from "../Sections/Posts/Posts";
 import { TwitchEmbed } from "react-twitch-embed";
-import { Paper, Space, TextInput, Button } from "@mantine/core";
+import { Paper, Space, TextInput, Button, Center } from "@mantine/core";
 import { useState } from "react";
 
 export default function Profile() {
@@ -25,11 +25,13 @@ export default function Profile() {
       <Space h="md" />
       <Paper shadow="xl" radius="sm" p="md" withBorder align="center">
         <form onSubmit={handleSubmit}>
-          <TextInput
-            placeholder="Enter your Twitch Channel Name"
-            radius="xl"
-            type="text"
-          />
+          <Center>
+            <TextInput
+              placeholder="Enter Twitch Username"
+              radius="xl"
+              type="text"
+            />
+          </Center>
           <Space h="md" />
           <Button variant="outline" size="xs" type="submit">
             Submit
