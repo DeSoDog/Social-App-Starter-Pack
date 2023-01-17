@@ -52,6 +52,7 @@ export const ProfileCard = () => {
             Please Log In or Sign Up to View your profile
           </Text>
         </Paper>
+        
       )}
     </>
   );

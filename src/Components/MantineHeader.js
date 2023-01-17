@@ -116,7 +116,7 @@ export default function MantineHeader() {
             to="/"
             sx={{ fontWeight: "bold", fontSize: 22, lineHeight: 1.4 }}
           >
-            DeSo Template App
+            Waves
           </Text>
 
           <Group
@@ -172,7 +172,7 @@ export default function MantineHeader() {
         opened={drawerOpened}
         onClose={closeDrawer}
         padding="md"
-        title="DeSo Template App"
+        title="Waves"
         size="md"
         className={classes.hiddenDesktop}
         zIndex={1000000}
