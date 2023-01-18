@@ -1,6 +1,7 @@
 import Deso from "deso-protocol";
 import { useEffect, useState } from "react";
 import { PublicKey } from "../State/App.state";
+
 import {
   Text,
   Avatar,
@@ -56,7 +57,7 @@ export default function Home() {
     const request = {
       PublicKeyBase58Check: publicKey,
       ReaderPublicKeyBase58Check: publicKey,
-      NumToFetch: 5,
+      NumToFetch: 20,
     };
 
     const response = await deso.posts.getPostsStateless(request);
@@ -103,7 +104,7 @@ export default function Home() {
                   return;
                 }
                 await deso.posts.submitPost({
-                  UpdaterPublicKeyBase58Check: deso.identity.getUserKey(),
+                  UpdaterPublicKeyBase58Check: publicKey,
                   BodyObj: {
                     Body: post,
                     VideoURLs: [],
@@ -113,7 +114,7 @@ export default function Home() {
                 setPost("");
               }}
             >
-              Create{" "}
+              Create
             </Button>
           </div>
         </Paper>
