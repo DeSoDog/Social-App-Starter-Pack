@@ -12,8 +12,14 @@ import {
   Space,
   ActionIcon,
   Tooltip,
+  Image,
 } from "@mantine/core";
-import { IconHeart, IconDiamond, IconRecycle } from "@tabler/icons";
+import {
+  IconHeart,
+  IconDiamond,
+  IconRecycle,
+  IconMessageCircle,
+} from "@tabler/icons";
 const useStyles = createStyles((theme) => ({
   comment: {
     padding: `${theme.spacing.lg}px ${theme.spacing.xl}px`,
@@ -22,6 +28,7 @@ const useStyles = createStyles((theme) => ({
   body: {
     paddingTop: theme.spacing.sm,
     fontSize: theme.fontSizes.sm,
+    wordWrap: "break-word",
   },
 
   content: {
@@ -71,12 +78,34 @@ export const PostsTemplate = ({ post, publicKey }: PostTemplateProps) => {
           {username}
         </Text>
       </Group>
-      <Center>
-        <TypographyStylesProvider className={classes.body}>
-          <Text size="md">{post.Body}</Text>
-        </TypographyStylesProvider>
-      </Center>
+
+      <TypographyStylesProvider>
+        <Text align="center" size="md" className={classes.body}>
+          {post.Body}
+        </Text>
+      </TypographyStylesProvider>
+
       <Space h="md" />
+
+      {post.ImageURLs && (
+        <div
+          style={{
+            width: 333,
+            marginLeft: "auto",
+            marginRight: "auto",
+          }}
+        >
+          <Image
+            src={post.ImageURLs[0]}
+            radius="md"
+            alt="post-image"
+            width="100%"
+          />
+        </div>
+      )}
+
+      <Space h="md" />
+
       <Center>
         <Tooltip
           transition="slide-down"
@@ -92,7 +121,9 @@ export const PostsTemplate = ({ post, publicKey }: PostTemplateProps) => {
         <Text size="xs" color="dimmed">
           {post.LikeCount}
         </Text>
+
         <Space w="sm" />
+
         <Tooltip
           transition="slide-down"
           withArrow
@@ -107,7 +138,9 @@ export const PostsTemplate = ({ post, publicKey }: PostTemplateProps) => {
         <Text size="xs" color="dimmed">
           {post.RepostCount}
         </Text>
+
         <Space w="sm" />
+
         <Tooltip
           transition="slide-down"
           withArrow
@@ -121,6 +154,23 @@ export const PostsTemplate = ({ post, publicKey }: PostTemplateProps) => {
         </Tooltip>
         <Text size="xs" color="dimmed">
           {post.DiamondCount}
+        </Text>
+
+        <Space w="sm" />
+
+        <Tooltip
+          transition="slide-down"
+          withArrow
+          position="bottom"
+          label="Comments"
+          transitionDuration={444}
+        >
+          <ActionIcon variant="subtle" radius="md" size={36}>
+            <IconMessageCircle size={18} stroke={1.5} />
+          </ActionIcon>
+        </Tooltip>
+        <Text size="xs" color="dimmed">
+          {post.CommentCount}
         </Text>
       </Center>
     </Paper>
