@@ -52,15 +52,20 @@ export default function Home() {
   const publicKey = useRecoilValue(PublicKey);
   const { classes } = useStyles();
   useEffect(() => {}, [post, setPost]);
-
+  useEffect(() => {
+    getFeed();
+  });
   const getFeed = async () => {
     const request = {
-      PublicKeyBase58Check: publicKey,
-      ReaderPublicKeyBase58Check: publicKey,
-      NumToFetch: 20,
+      PublicKeyBase58Check:
+        "BC1YLiHVU5UCHeP1MzMUoDAptWK1zXJm68JCumFB4v6CeaSkk6c1v8U",
+      ReaderPublicKeyBase58Check:
+        "BC1YLiHVU5UCHeP1MzMUoDAptWK1zXJm68JCumFB4v6CeaSkk6c1v8U",
+      NumToFetch: 40,
     };
 
     const response = await deso.posts.getPostsStateless(request);
+    console.log(response);
     if (!response) {
       console.log("No response from the server");
     }
@@ -121,9 +126,7 @@ export default function Home() {
       </Center>
       <div>
         <Space h="md" />
-        <Button align="center" variant="outline" onClick={getFeed}>
-          Refresh Feed
-        </Button>
+
         {feed.map((post) => (
           <Paper
             m="md"
