@@ -1,4 +1,4 @@
-import { Grid, Paper, Center, Divider, Text } from "@mantine/core";
+import { Grid, Paper, Center, Divider, Text, Space } from "@mantine/core";
 import { TwitchPlayer } from "react-twitch-embed";
 import { useRef } from "react";
 
@@ -21,10 +21,21 @@ export default function Discover() {
         }
         labelPosition="center"
       />
+      <Space h="xl" />
       <Grid grow>
         <Grid.Col span={4}>
           <Center>
             <Paper shadow="xl" radius="md" p="xs">
+              <Text
+                align="center"
+                size="xl"
+                lineClamp={4}
+                variant="gradient"
+                gradient={{ from: "indigo", to: "cyan", deg: 45 }}
+              >
+                shanks_ttv
+              </Text>
+              <Divider my="sm" variant="dotted" />
               <TwitchPlayer
                 channel="shanks_ttv"
                 autoplay
@@ -39,6 +50,16 @@ export default function Discover() {
         <Grid.Col span={4}>
           <Center>
             <Paper shadow="xl" radius="md" p="xs">
+              <Text
+                align="center"
+                size="xl"
+                lineClamp={4}
+                variant="gradient"
+                gradient={{ from: "indigo", to: "cyan", deg: 45 }}
+              >
+                GMHikaru
+              </Text>
+              <Divider my="sm" variant="dotted" />
               <TwitchPlayer
                 channel="GMHikaru"
                 autoplay
@@ -53,6 +74,16 @@ export default function Discover() {
         <Grid.Col span={4}>
           <Center>
             <Paper shadow="xl" radius="md" p="xs">
+              <Text
+                align="center"
+                size="xl"
+                lineClamp={4}
+                variant="gradient"
+                gradient={{ from: "indigo", to: "cyan", deg: 45 }}
+              >
+                sgares
+              </Text>
+              <Divider my="sm" variant="dotted" />
               <TwitchPlayer
                 channel="sgares"
                 autoplay
@@ -67,6 +98,16 @@ export default function Discover() {
         <Grid.Col span={4}>
           <Center>
             <Paper shadow="xl" radius="md" p="xs">
+              <Text
+                align="center"
+                size="xl"
+                lineClamp={4}
+                variant="gradient"
+                gradient={{ from: "indigo", to: "cyan", deg: 45 }}
+              >
+                shroud
+              </Text>
+              <Divider my="sm" variant="dotted" />
               <TwitchPlayer
                 channel="shroud"
                 autoplay
@@ -81,6 +122,16 @@ export default function Discover() {
         <Grid.Col span={4}>
           <Center>
             <Paper shadow="xl" radius="md" p="xs">
+              <Text
+                align="center"
+                size="xl"
+                lineClamp={4}
+                variant="gradient"
+                gradient={{ from: "indigo", to: "cyan", deg: 45 }}
+              >
+                subroza
+              </Text>
+              <Divider my="sm" variant="dotted" />
               <TwitchPlayer
                 channel="subroza"
                 autoplay

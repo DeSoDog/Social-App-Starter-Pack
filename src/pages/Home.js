@@ -47,15 +47,15 @@ const useStyles = createStyles((theme) => ({
 }));
 
 export default function Home() {
-  const [post, setPost] = useState("");
+  const [create, setPost] = useState("");
   const [feed, setFeed] = useState([]);
   const [profilePics, setProfilePics] = useState("");
   const publicKey = useRecoilValue(PublicKey);
   const { classes } = useStyles();
-  useEffect(() => {}, [post, setPost]);
   useEffect(() => {
     getFeed();
   }, []);
+  useEffect(() => {}, [create, setPost]);
 
   const getFeed = async () => {
     const request = {
@@ -67,20 +67,20 @@ export default function Home() {
     };
 
     const response = await deso.posts.getPostsStateless(request);
-    console.log(response);
+
     if (!response) {
       console.log("No response from the server");
     }
+    setFeed(response.PostsFound);
     const profilePics = {};
-    response.PostsFound.map(async (post) => {
+    feed.forEach((post) => {
       profilePics[post.ProfileEntryResponse.PublicKeyBase58Check] =
         deso.user.getSingleProfilePicture(
           post.ProfileEntryResponse.PublicKeyBase58Check
         );
-    });
 
-    setFeed(response.PostsFound);
-    setProfilePics(profilePics);
+      setProfilePics(profilePics);
+    });
   };
 
   return (
@@ -93,7 +93,7 @@ export default function Home() {
               placeholder="Let them hear your voice!"
               radius="md"
               size="xl"
-              value={post}
+              value={create}
               onChange={(e) => {
                 setPost(e.target.value);
               }}
@@ -105,14 +105,13 @@ export default function Home() {
               <Button
                 variant="outline"
                 onClick={async () => {
-                  console.log(post);
-                  if (!post) {
+                  if (!create) {
                     return;
                   }
                   await deso.posts.submitPost({
                     UpdaterPublicKeyBase58Check: publicKey,
                     BodyObj: {
-                      Body: post,
+                      Body: create,
                       VideoURLs: [],
                       ImageURLs: [],
                     },

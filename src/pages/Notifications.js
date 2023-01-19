@@ -17,7 +17,7 @@ const deso = new Deso();
 export default function Notifications() {
   const [notifications, setNotifications] = useState([]);
   const [profilePics, setProfilePics] = useState("");
-  const [userName, setUsername] = useState("");
+  
   const publicKey = useRecoilValue(PublicKey);
   useEffect(() => {
     getNotifications();
