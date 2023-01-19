@@ -54,7 +54,7 @@ export default function Home() {
   useEffect(() => {}, [post, setPost]);
   useEffect(() => {
     getFeed();
-  });
+  }, []);
   const getFeed = async () => {
     const request = {
       PublicKeyBase58Check:
