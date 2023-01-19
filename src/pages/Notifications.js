@@ -10,6 +10,7 @@ import {
   Space,
   Center,
   Divider,
+  Skeleton,
 } from "@mantine/core";
 const deso = new Deso();
 
@@ -89,14 +90,19 @@ export default function Notifications() {
         <Center>
           <Paper shadow="xl" radius="lg" p="xl" withBorder>
             <Space h="xl" />
-
+            <Space h="xl" />
+            <Skeleton height={50} circle mb="xl" />
+            <Skeleton height={8} radius="xl" />
+            <Skeleton height={8} mt={6} radius="xl" />
+            <Skeleton height={8} mt={6} width="70%" radius="xl" />
+            <Space h="xl" />
             <Text
               size="xl"
               lineClamp={4}
               variant="gradient"
               gradient={{ from: "indigo", to: "cyan", deg: 45 }}
             >
-              Please log in to view your Notifications.
+              Please login to view your Notifications.
             </Text>
           </Paper>
         </Center>

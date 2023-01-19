@@ -16,6 +16,7 @@ import {
   TextInput,
   Button,
   Image,
+  Skeleton,
 } from "@mantine/core";
 import {
   IconHeart,
@@ -55,6 +56,7 @@ export default function Home() {
   useEffect(() => {
     getFeed();
   }, []);
+
   const getFeed = async () => {
     const request = {
       PublicKeyBase58Check:
@@ -70,13 +72,12 @@ export default function Home() {
       console.log("No response from the server");
     }
     const profilePics = {};
-    response.PostsFound.forEach((post) => {
+    response.PostsFound.map(async (post) => {
       profilePics[post.ProfileEntryResponse.PublicKeyBase58Check] =
         deso.user.getSingleProfilePicture(
           post.ProfileEntryResponse.PublicKeyBase58Check
         );
     });
-    console.log(response.PostsFound);
 
     setFeed(response.PostsFound);
     setProfilePics(profilePics);
@@ -84,9 +85,9 @@ export default function Home() {
 
   return (
     <>
-      <Center>
-        <Paper shadow="xl" radius="xl" p="xl">
-          <div className="flex justify-center">
+      {publicKey ? (
+        <Group position="center">
+          <Paper shadow="xl" radius="xl" p="xl">
             <TextInput
               variant="unstyled"
               placeholder="Let them hear your voice!"
@@ -98,35 +99,56 @@ export default function Home() {
               }}
               className="ml-2 min-w-[400px] min-h-[50px] text-black"
             />
-          </div>
-          <Space h="md" />
-          <div className="flex justify-center">
-            <Button
-              variant="outline"
-              onClick={async () => {
-                console.log(post);
-                if (!post) {
-                  return;
-                }
-                await deso.posts.submitPost({
-                  UpdaterPublicKeyBase58Check: publicKey,
-                  BodyObj: {
-                    Body: post,
-                    VideoURLs: [],
-                    ImageURLs: [],
-                  },
-                });
-                setPost("");
-              }}
+
+            <Space h="md" />
+            <Group position="right">
+              <Button
+                variant="outline"
+                onClick={async () => {
+                  console.log(post);
+                  if (!post) {
+                    return;
+                  }
+                  await deso.posts.submitPost({
+                    UpdaterPublicKeyBase58Check: publicKey,
+                    BodyObj: {
+                      Body: post,
+                      VideoURLs: [],
+                      ImageURLs: [],
+                    },
+                  });
+                  setPost("");
+                }}
+              >
+                Create
+              </Button>
+            </Group>
+          </Paper>
+        </Group>
+      ) : (
+        <Center>
+          <Paper shadow="xl" radius="xl" p="xl">
+            <Space h="xl" />
+            <Skeleton height={50} circle mb="xl" />
+            <Skeleton height={8} radius="xl" />
+            <Skeleton height={8} mt={6} radius="xl" />
+            <Skeleton height={8} mt={6} width="70%" radius="xl" />
+            <Space h="xl" />
+
+            <Text
+              size="xl"
+              lineClamp={4}
+              variant="gradient"
+              gradient={{ from: "indigo", to: "cyan", deg: 45 }}
             >
-              Create
-            </Button>
-          </div>
-        </Paper>
-      </Center>
+              Please log in to Post.
+            </Text>
+          </Paper>
+        </Center>
+      )}
+
       <div>
         <Space h="md" />
-
         {feed.map((post) => (
           <Paper
             m="md"
