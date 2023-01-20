@@ -7,6 +7,7 @@ import {
   Space,
   Group,
 } from "@mantine/core";
+import { Carousel } from "@mantine/carousel";
 import { TwitchPlayer } from "react-twitch-embed";
 import { useRef } from "react";
 
@@ -30,130 +31,135 @@ export default function Discover() {
         labelPosition="center"
       />
       <Space h="xl" />
-      <Group position="center">
-        <Grid grow>
-          <Grid.Col span={4}>
-            <Center>
-              <Paper shadow="xl" radius="md" p="xs">
-                <Text
-                  align="center"
-                  size="xl"
-                  lineClamp={4}
-                  variant="gradient"
-                  gradient={{ from: "indigo", to: "cyan", deg: 45 }}
-                >
-                  shanks_ttv
-                </Text>
-                <Divider my="sm" variant="dotted" />
-                <TwitchPlayer
-                  channel="shanks_ttv"
-                  autoplay
-                  muted
-                  width={333}
-                  onReady={handleReady}
-                  id="1"
-                />
-              </Paper>
-            </Center>
-          </Grid.Col>
-          <Grid.Col span={4}>
-            <Center>
-              <Paper shadow="xl" radius="md" p="xs">
-                <Text
-                  align="center"
-                  size="xl"
-                  lineClamp={4}
-                  variant="gradient"
-                  gradient={{ from: "indigo", to: "cyan", deg: 45 }}
-                >
-                  GMHikaru
-                </Text>
-                <Divider my="sm" variant="dotted" />
-                <TwitchPlayer
-                  channel="GMHikaru"
-                  autoplay
-                  muted
-                  width={333}
-                  onReady={handleReady}
-                  id="2"
-                />
-              </Paper>
-            </Center>
-          </Grid.Col>
-          <Grid.Col span={4}>
-            <Center>
-              <Paper shadow="xl" radius="md" p="xs">
-                <Text
-                  align="center"
-                  size="xl"
-                  lineClamp={4}
-                  variant="gradient"
-                  gradient={{ from: "indigo", to: "cyan", deg: 45 }}
-                >
-                  sgares
-                </Text>
-                <Divider my="sm" variant="dotted" />
-                <TwitchPlayer
-                  channel="sgares"
-                  autoplay
-                  muted
-                  width={333}
-                  onReady={handleReady}
-                  id="3"
-                />
-              </Paper>
-            </Center>
-          </Grid.Col>
-          <Grid.Col span={4}>
-            <Center>
-              <Paper shadow="xl" radius="md" p="xs">
-                <Text
-                  align="center"
-                  size="xl"
-                  lineClamp={4}
-                  variant="gradient"
-                  gradient={{ from: "indigo", to: "cyan", deg: 45 }}
-                >
-                  shroud
-                </Text>
-                <Divider my="sm" variant="dotted" />
-                <TwitchPlayer
-                  channel="shroud"
-                  autoplay
-                  muted
-                  width={333}
-                  onReady={handleReady}
-                  id="4"
-                />
-              </Paper>
-            </Center>
-          </Grid.Col>
-          <Grid.Col span={4}>
-            <Center>
-              <Paper shadow="xl" radius="md" p="xs">
-                <Text
-                  align="center"
-                  size="xl"
-                  lineClamp={4}
-                  variant="gradient"
-                  gradient={{ from: "indigo", to: "cyan", deg: 45 }}
-                >
-                  subroza
-                </Text>
-                <Divider my="sm" variant="dotted" />
-                <TwitchPlayer
-                  channel="subroza"
-                  autoplay
-                  muted
-                  width={333}
-                  onReady={handleReady}
-                  id="5"
-                />
-              </Paper>
-            </Center>
-          </Grid.Col>
-        </Grid>
-      </Group>
+      <Carousel
+        slideGap="md"
+        controlsOffset="xs"
+        controlSize={33}
+        loop
+        draggable={true}
+        withIndicators
+      >
+        <Carousel.Slide>
+          <Center>
+            <Paper shadow="xl" radius="md" p="xs">
+              <Text
+                align="center"
+                size="xl"
+                lineClamp={4}
+                variant="gradient"
+                gradient={{ from: "indigo", to: "cyan", deg: 45 }}
+              >
+                Tarik
+              </Text>
+              <Divider my="sm" variant="dotted" />
+              <TwitchPlayer
+                channel="tarik"
+                width={333}
+                autoplay
+                muted
+                onReady={handleReady}
+                id="1"
+              />
+            </Paper>
+          </Center>
+        </Carousel.Slide>
+        <Carousel.Slide>
+          <Center>
+            <Paper shadow="xl" radius="md" p="xs">
+              <Text
+                align="center"
+                size="xl"
+                lineClamp={4}
+                variant="gradient"
+                gradient={{ from: "indigo", to: "cyan", deg: 45 }}
+              >
+                Shroud
+              </Text>
+              <Divider my="sm" variant="dotted" />
+              <TwitchPlayer
+                channel="Shroud"
+                width={333}
+                autoplay
+                muted
+                onReady={handleReady}
+                id="2"
+              />
+            </Paper>
+          </Center>
+        </Carousel.Slide>
+        <Carousel.Slide>
+          <Center>
+            <Paper shadow="xl" radius="md" p="xs">
+              <Text
+                align="center"
+                size="xl"
+                lineClamp={4}
+                variant="gradient"
+                gradient={{ from: "indigo", to: "cyan", deg: 45 }}
+              >
+                Aceu
+              </Text>
+              <Divider my="sm" variant="dotted" />
+              <TwitchPlayer
+                channel="aceu"
+                autoplay
+                muted
+                width={333}
+                onReady={handleReady}
+                id="3"
+              />
+            </Paper>
+          </Center>
+        </Carousel.Slide>
+        <Carousel.Slide>
+          <Center>
+            <Paper shadow="xl" radius="md" p="xs">
+              <Text
+                align="center"
+                size="xl"
+                lineClamp={4}
+                variant="gradient"
+                gradient={{ from: "indigo", to: "cyan", deg: 45 }}
+              >
+                Kenny Beats
+              </Text>
+              <Divider my="sm" variant="dotted" />
+              <TwitchPlayer
+                channel="kennybeats"
+                width={333}
+                autoplay
+                muted
+                onReady={handleReady}
+                id="4"
+              />
+            </Paper>
+          </Center>
+        </Carousel.Slide>
+        <Carousel.Slide>
+          <Center>
+            <Paper shadow="xl" radius="md" p="xs">
+              <Text
+                align="center"
+                size="xl"
+                lineClamp={4}
+                variant="gradient"
+                gradient={{ from: "indigo", to: "cyan", deg: 45 }}
+              >
+                Shanks
+              </Text>
+              <Divider my="sm" variant="dotted" />
+              <TwitchPlayer
+                channel="shanks_ttv"
+                width={333}
+                autoplay
+                muted
+                onReady={handleReady}
+                id="5"
+              />
+            </Paper>
+          </Center>
+        </Carousel.Slide>
+      </Carousel>
     </>
   );
 }

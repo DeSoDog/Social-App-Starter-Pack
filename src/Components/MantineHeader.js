@@ -128,7 +128,7 @@ export default function MantineHeader() {
               className={classes.search}
               placeholder="Search"
               icon={<IconSearch size={16} stroke={1.5} />}
-              data={["Deso App Template"]}
+              data={["Waves"]}
             />
           </Group>
 
