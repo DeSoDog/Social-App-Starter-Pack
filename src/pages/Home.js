@@ -16,7 +16,6 @@ import {
   TextInput,
   Button,
   Image,
-  Skeleton,
 } from "@mantine/core";
 import {
   IconHeart,
@@ -49,7 +48,7 @@ const useStyles = createStyles((theme) => ({
 export default function Home() {
   const [create, setPost] = useState("");
   const [feed, setFeed] = useState([]);
-  const [profilePics, setProfilePics] = useState("");
+
   const publicKey = useRecoilValue(PublicKey);
   const { classes } = useStyles();
   useEffect(() => {}, [create, setPost]);
@@ -165,7 +164,7 @@ export default function Home() {
           >
             <Group>
               <Space w="xs" />
-              <Avatar size={33} radius={33} src={profilePics} />
+              <Avatar size={33} radius={33} />
               <Text weight="bold" size="sm">
                 {_.get(post, "ProfileEntryResponse.Username", "anon")}
               </Text>

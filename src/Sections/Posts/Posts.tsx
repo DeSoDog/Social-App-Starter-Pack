@@ -8,6 +8,7 @@ const deso = new Deso();
 export const Posts = ({ publicKey }: ProfilePostsProps) => {
   useEffect(() => {
     getPosts();
+    // eslint-disable-next-line
   }, []);
   const [posts, setPosts] = useState<JSX.Element[]>([]);
   const getPosts = async () => {

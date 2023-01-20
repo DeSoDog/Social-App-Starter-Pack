@@ -20,6 +20,7 @@ export default function Notifications() {
   const publicKey = useRecoilValue(PublicKey);
   useEffect(() => {
     getNotifications();
+    // eslint-disable-next-line
   }, []);
 
   const getNotifications = async () => {
