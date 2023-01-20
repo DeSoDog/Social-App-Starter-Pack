@@ -16,13 +16,10 @@ export const ProfilePic = ({ publicKey }: ProfilePicProps) => {
     getProfilePic();
   });
 
-  const [pic, setProfilePic] = useState("");
   const [profile, setProfile] = useState<null | GetSingleProfileResponse>(null);
   const [followerInfo, setFollowers] = useState<null | FollowerInfo>(null);
 
   const getProfilePic = async () => {
-    const profilePic = deso.user.getSingleProfilePicture(publicKey);
-
     const profile = await deso.user.getSingleProfile({
       PublicKeyBase58Check: publicKey,
     });
@@ -34,14 +31,19 @@ export const ProfilePic = ({ publicKey }: ProfilePicProps) => {
     const following = await deso.social.getFollowsStateless({
       PublicKeyBase58Check: publicKey,
     });
-    setProfilePic(profilePic);
+
     setProfile(profile);
     setFollowers({ following, followers });
   };
 
   return (
     <>
-      <Avatar size={77} radius={77} mx="auto" src={pic} />
+      <Avatar
+        size={77}
+        radius={77}
+        mx="auto"
+        src={deso.user.getSingleProfilePicture(publicKey)}
+      />
       <Center>
         <Text align="center" size="lg" weight={777} mt="md">
           {profile?.Profile?.Username && "@" + profile?.Profile?.Username}

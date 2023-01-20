@@ -16,9 +16,9 @@ export const Posts = ({ publicKey }: ProfilePostsProps) => {
         PublicKeyBase58Check: publicKey,
         NumToFetch: 40,
       })
-    ).Posts?.filter(postFilter).map((posts) =>
-      setPostTemplate(posts, publicKey)
-    );
+    ).Posts?.filter(postFilter).map((posts, index) => (
+      <div key={index}> {setPostTemplate(posts, publicKey)} </div>
+    ));
     if (posts) {
       setPosts(posts);
       console.log(posts);

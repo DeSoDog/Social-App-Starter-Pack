@@ -1,4 +1,11 @@
-import { Space, Skeleton, Text, Button, Paper, Center } from "@mantine/core";
+import {
+  Space,
+  Avatar,
+  Text,
+  Paper,
+  Center,
+  Group,
+} from "@mantine/core";
 import { PublicKey } from "../../State/App.state";
 import { useRecoilValue } from "recoil";
 import { ProfilePic } from "../../Components/ProfilePic";
@@ -23,19 +30,10 @@ export const ProfileCard = () => {
           })}
         >
           <ProfilePic publicKey={publicKey as string} />
-          <Button fullWidth variant="default" radius="md" mt="xl" size="md">
-            Follow
-          </Button>
         </Paper>
       ) : (
         <Center>
           <Paper shadow="xl" radius="lg" p="xl" withBorder>
-            <Space h="xl" />
-            <Space h="xl" />
-            <Skeleton height={50} circle mb="xl" />
-            <Skeleton height={8} radius="xl" />
-            <Skeleton height={8} mt={6} radius="xl" />
-            <Skeleton height={8} mt={6} width="70%" radius="xl" />
             <Space h="xl" />
             <Text
               size="xl"
@@ -45,6 +43,12 @@ export const ProfileCard = () => {
             >
               Please login to view your Profile.
             </Text>
+
+            <Space h="xl" />
+            <Group position="center">
+              <Avatar size={77} radius="xl" />
+            </Group>
+            <Space h="xl" />
           </Paper>
         </Center>
       )}

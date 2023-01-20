@@ -10,14 +10,13 @@ import {
   Space,
   Center,
   Divider,
-  Skeleton,
 } from "@mantine/core";
 const deso = new Deso();
 
 export default function Notifications() {
   const [notifications, setNotifications] = useState([]);
   const [profilePics, setProfilePics] = useState("");
-  
+
   const publicKey = useRecoilValue(PublicKey);
   useEffect(() => {
     getNotifications();
@@ -74,7 +73,7 @@ export default function Notifications() {
                         profilePics[
                           notification.Metadata.AffectedPublicKeys[0]
                             .PublicKeyBase58Check
-                        ]
+                        ] || null
                       }
                     />
 
@@ -89,13 +88,6 @@ export default function Notifications() {
       ) : (
         <Center>
           <Paper shadow="xl" radius="lg" p="xl" withBorder>
-            <Space h="xl" />
-            <Space h="xl" />
-            <Skeleton height={50} circle mb="xl" />
-            <Skeleton height={8} radius="xl" />
-            <Skeleton height={8} mt={6} radius="xl" />
-            <Skeleton height={8} mt={6} width="70%" radius="xl" />
-            <Space h="xl" />
             <Text
               size="xl"
               lineClamp={4}

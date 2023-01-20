@@ -1,7 +1,7 @@
 import Deso from "deso-protocol";
 import { useEffect, useState } from "react";
 import { PublicKey } from "../State/App.state";
-
+import _ from "lodash";
 import {
   Text,
   Avatar,
@@ -52,10 +52,10 @@ export default function Home() {
   const [profilePics, setProfilePics] = useState("");
   const publicKey = useRecoilValue(PublicKey);
   const { classes } = useStyles();
+  useEffect(() => {}, [create, setPost]);
   useEffect(() => {
     getFeed();
   }, []);
-  useEffect(() => {}, [create, setPost]);
 
   const getFeed = async () => {
     const request = {
@@ -65,22 +65,12 @@ export default function Home() {
         "BC1YLiHVU5UCHeP1MzMUoDAptWK1zXJm68JCumFB4v6CeaSkk6c1v8U",
       NumToFetch: 40,
     };
-
     const response = await deso.posts.getPostsStateless(request);
-
+    console.log(response.PostsFound);
     if (!response) {
       console.log("No response from the server");
     }
     setFeed(response.PostsFound);
-    const profilePics = {};
-    feed.forEach((post) => {
-      profilePics[post.ProfileEntryResponse.PublicKeyBase58Check] =
-        deso.user.getSingleProfilePicture(
-          post.ProfileEntryResponse.PublicKeyBase58Check
-        );
-
-      setProfilePics(profilePics);
-    });
   };
 
   return (
@@ -88,6 +78,11 @@ export default function Home() {
       {publicKey ? (
         <Group position="center">
           <Paper shadow="xl" radius="xl" p="xl">
+            <Avatar
+              size={44}
+              radius={33}
+              src={deso.user.getSingleProfilePicture(publicKey)}
+            />
             <TextInput
               variant="unstyled"
               placeholder="Let them hear your voice!"
@@ -127,28 +122,38 @@ export default function Home() {
       ) : (
         <Center>
           <Paper shadow="xl" radius="xl" p="xl">
-            <Space h="xl" />
-            <Skeleton height={50} circle mb="xl" />
-            <Skeleton height={8} radius="xl" />
-            <Skeleton height={8} mt={6} radius="xl" />
-            <Skeleton height={8} mt={6} width="70%" radius="xl" />
-            <Space h="xl" />
-
-            <Text
+            <Avatar size={44} radius={33} />
+            <TextInput
+              variant="unstyled"
+              placeholder="Let them hear your voice!"
+              radius="md"
               size="xl"
-              lineClamp={4}
-              variant="gradient"
-              gradient={{ from: "indigo", to: "cyan", deg: 45 }}
-            >
-              Please log in to Post.
-            </Text>
+              className="ml-2 min-w-[400px] min-h-[50px] text-black"
+            />
+
+            <Space h="md" />
+            <Group position="right">
+              <Tooltip
+                transition="slide-up"
+                transitionDuration={444}
+                label="Login to Create!"
+              >
+                <Button
+                  data-disabled
+                  sx={{ "&[data-disabled]": { pointerEvents: "all" } }}
+                  onClick={(event) => event.preventDefault()}
+                >
+                  Create
+                </Button>
+              </Tooltip>
+            </Group>
           </Paper>
         </Center>
       )}
 
       <div>
         <Space h="md" />
-        {feed.map((post) => (
+        {feed.map((post, index) => (
           <Paper
             m="md"
             shadow="lg"
@@ -156,19 +161,13 @@ export default function Home() {
             p="xl"
             withBorder
             className={classes.comment}
-            key={post.PostId}
+            key={index}
           >
             <Group>
               <Space w="xs" />
-              <Avatar
-                size={33}
-                radius={33}
-                src={
-                  profilePics[post.ProfileEntryResponse.PublicKeyBase58Check]
-                }
-              />
+              <Avatar size={33} radius={33} src={profilePics} />
               <Text weight="bold" size="sm">
-                {post.ProfileEntryResponse.Username}
+                {_.get(post, "ProfileEntryResponse.Username", "anon")}
               </Text>
             </Group>
 
