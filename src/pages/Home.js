@@ -51,7 +51,7 @@ export default function Home() {
 
   const publicKey = useRecoilValue(PublicKey);
   const { classes } = useStyles();
-  useEffect(() => {}, [create, setPost]);
+
   useEffect(() => {
     getFeed();
   }, []);
@@ -65,11 +65,12 @@ export default function Home() {
       NumToFetch: 40,
     };
     const response = await deso.posts.getPostsStateless(request);
-    console.log(response.PostsFound);
+
     if (!response) {
       console.log("No response from the server");
     }
     setFeed(response.PostsFound);
+    console.log(response.PostsFound);
   };
 
   return (
@@ -100,17 +101,23 @@ export default function Home() {
                 variant="outline"
                 onClick={async () => {
                   if (!create) {
+                    console.log("Create state is empty, cannot submit post.");
                     return;
                   }
-                  await deso.posts.submitPost({
-                    UpdaterPublicKeyBase58Check: publicKey,
-                    BodyObj: {
-                      Body: create,
-                      VideoURLs: [],
-                      ImageURLs: [],
-                    },
-                  });
-                  setPost("");
+                  try {
+                    await deso.posts.submitPost({
+                      UpdaterPublicKeyBase58Check: publicKey,
+                      BodyObj: {
+                        Body: create,
+                        VideoURLs: [],
+                        ImageURLs: [],
+                      },
+                    });
+                    setPost("");
+                    console.log("Post submitted successfully!");
+                  } catch (error) {
+                    console.log("Error submitting post: ", error);
+                  }
                 }}
               >
                 Create
@@ -164,7 +171,13 @@ export default function Home() {
           >
             <Group>
               <Space w="xs" />
-              <Avatar size={33} radius={33} />
+              <Avatar
+                size={33}
+                radius={33}
+                src={deso.user.getSingleProfilePicture(
+                  post.PosterPublicKeyBase58Check
+                )}
+              />
               <Text weight="bold" size="sm">
                 {_.get(post, "ProfileEntryResponse.Username", "anon")}
               </Text>
