@@ -177,20 +177,15 @@ export default function Home() {
             </TypographyStylesProvider>
             <Space h="md" />
             {post.ImageURLs && (
-              <div
-                style={{
-                  width: 333,
-                  marginLeft: "auto",
-                  marginRight: "auto",
-                }}
-              >
+              <Center>
                 <Image
+                  fit="contain"
                   src={post.ImageURLs[0]}
                   radius="md"
                   alt="post-image"
-                  width="100%"
+                  width={555}
                 />
-              </div>
+              </Center>
             )}
             <Space h="md" />
             <Center>
